@@ -31,13 +31,14 @@ import static org.iot.hotelitybackend.common.util.ExcelUtil.createExcelFile;
 public class EmployeeController {
     private final ModelMapper mapper;
     private final EmployeeService employeeService;
-    private final AwsS3Service awsS3Service;
+    // private final AwsS3Service awsS3Service;
 
     @Autowired
-    public EmployeeController(EmployeeService employeeService, ModelMapper mapper, AwsS3Service awsS3Service) {
+    // public EmployeeController(EmployeeService employeeService, ModelMapper mapper, AwsS3Service awsS3Service) {
+    public EmployeeController(EmployeeService employeeService, ModelMapper mapper) {
         this.mapper = mapper;
         this.employeeService = employeeService;
-        this.awsS3Service = awsS3Service;
+        // this.awsS3Service = awsS3Service;
     }
 
     /* 조건별 전체 직원 페이지 리스트 조회 */
@@ -166,33 +167,33 @@ public class EmployeeController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    /* S3 이미지 업로드 */
-    @PostMapping("/{employeeCode}/image")
-    public ResponseEntity<?> uploadImageToS3(
-            @RequestPart(value = "image", required = false) MultipartFile image,
-            @PathVariable("employeeCode") int employCode
-    ) {
-        String imgUrl = awsS3Service.upload(image, employCode);
-
-        if (imgUrl == null) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok(ResponseVO.builder().data(imgUrl).resultCode(HttpStatus.OK.value()).build());
-    }
-
-    /* S3 이미지 삭제 */
-    @DeleteMapping("/{employeeCode}/image")
-    public ResponseEntity<?> deleteImageFromS3(
-            @RequestParam String imageAddress,
-            @PathVariable("employeeCode") int employCode
-    ) {
-        boolean result = awsS3Service.deleteImageFromS3(imageAddress, employCode);
-
-        if (!result) {
-            return ResponseEntity.badRequest().build();
-        }
-
-        return ResponseEntity.ok(ResponseVO.builder().resultCode(HttpStatus.OK.value()).build());
-    }
+    // /* S3 이미지 업로드 */
+    // @PostMapping("/{employeeCode}/image")
+    // public ResponseEntity<?> uploadImageToS3(
+    //         @RequestPart(value = "image", required = false) MultipartFile image,
+    //         @PathVariable("employeeCode") int employCode
+    // ) {
+    //     String imgUrl = awsS3Service.upload(image, employCode);
+    //
+    //     if (imgUrl == null) {
+    //         return ResponseEntity.badRequest().build();
+    //     }
+    //
+    //     return ResponseEntity.ok(ResponseVO.builder().data(imgUrl).resultCode(HttpStatus.OK.value()).build());
+    // }
+    //
+    // /* S3 이미지 삭제 */
+    // @DeleteMapping("/{employeeCode}/image")
+    // public ResponseEntity<?> deleteImageFromS3(
+    //         @RequestParam String imageAddress,
+    //         @PathVariable("employeeCode") int employCode
+    // ) {
+    //     boolean result = awsS3Service.deleteImageFromS3(imageAddress, employCode);
+    //
+    //     if (!result) {
+    //         return ResponseEntity.badRequest().build();
+    //     }
+    //
+    //     return ResponseEntity.ok(ResponseVO.builder().resultCode(HttpStatus.OK.value()).build());
+    // }
 }

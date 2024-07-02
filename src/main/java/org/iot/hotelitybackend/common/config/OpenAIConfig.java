@@ -7,7 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestTemplate;
 
-@Configuration
+// @Configuration
 public class OpenAIConfig {
 
 	@Value("${openai.api.key}")
