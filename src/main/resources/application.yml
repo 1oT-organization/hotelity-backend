@@ -1,5 +1,72 @@
 server:
-  port: 8888
+  port: 8080
+#
+#spring:
+#  application:
+#    name: hotelity-backend
+#  profiles:
+#    active: dev
+#  datasource:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: ENC(otztEs5aKXne8m58InHx6eDrOsCGK64i7ZLJUho6/K+yRK/rp5xTA6RruJUx9/GVEbjmMKmiYmYLC6RKPnadzbNsnno0uNLLzNUOMQ+B0kauAyDbD/anZAv06GyjmCdyfm05VWIOF2g=)
+#    username: ENC(LwXqcdnmfm/JKkHwzvaVpA==)
+#    password: ENC(iMwe5lEyyaFkIqpSxsGwrzAs4YOJlsBY)
+#    hikari:
+#      maximumPoolSize: 15
+#      minimumIdle: 5
+#      idleTimeout: 10000
+#  jpa:
+#    generate-ddl: false
+#    show-sql: true
+#    database: mysql
+#    properties:
+#      hibernate:
+#        format_sql: true
+#  data:
+#    redis:
+#      host: ENC(h3W4NTNKldG2+iXGVm7NBhTBxBSKj2OWnbDQvTq0jLrpwRMKffUTAJUV3MnyBEdAJVoNo2bn5eu5/xaZhEYnWiCnExq4IJPzXwmBXL8HlFRD5Roj0b0INQ==)
+#      port: 6379
+#      expiration_time: 86400000 # 1일
+#  mail:
+#    host: ENC(dqAOlK8LvZVY7JI9tIHJ/Vylqe9rFtbc)
+#    port: 587
+#    username: ENC(XIVDUNkHy2oVfrR3Mmc0LsJiE9vM/JQDUpoirrzmnhw=)
+#    password: ENC(s/dvkMZ265k/jDJypsc3s2QUZ04PoTxC0uTcMiZLk4o=)
+#    properties:
+#      mail:
+#        debug: true
+#        smtp:
+#          connectiontimeout: 5000
+#          starttls:
+#            enable: true
+#            required: true
+#          auth: false
+#
+#token:
+#  expiration_time: 3600000 # 1시간
+#  secret: ENC(HiAmDQCu5uB3wxZd88tadcY88HR+h4ddSnett5UeK8A1SKj51Ta+Zt+wWkEv3pHeY+M0Hliot4SIFOxLmRXoTt9mZAmzygb0HbldxYLlFf+uia6UWS6TNhRzllzvaG8+6aRWwIZld/I=)
+#
+#aws:
+#  s3:
+#    accessKey: ENC(RfQev1y4fyRhfeLJm5jApjlY4vXBTb9Brk7fAQR7BR0=)
+#    secretKey: ENC(xuzlJoAwmK+3F0hG+udoEVYhFkMLEREMp9+bknzKJ2kHxC944WNXptWB25WSCjFNROxTfJQ017Y=)
+#    bucket: ENC(u7vwg/o3mdglMhfv8KXP8N5z13UUC6EV)
+#
+#jasypt:
+#  encryptor:
+#    bean: jasyptStringEncryptor
+#
+#openai:
+#  api:
+#    key: ENC(IzSsO5GBuqCRGIQd/FAQYFCLkk2qkhdacmKtf358axeC8Lhy93gXxUI+EkPkWwHhRuXKzQ8PjRagUZuWl4UlDQ==)
+#    url: https://api.openai.com/v1/chat/completions
+#  model: gpt-3.5-turbo
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "prometheus"
 
 spring:
   application:
@@ -8,13 +75,19 @@ spring:
     active: dev
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: ENC(otztEs5aKXne8m58InHx6eDrOsCGK64i7ZLJUho6/K+yRK/rp5xTA6RruJUx9/GVEbjmMKmiYmYLC6RKPnadzbNsnno0uNLLzNUOMQ+B0kauAyDbD/anZAv06GyjmCdyfm05VWIOF2g=)
-    username: ENC(LwXqcdnmfm/JKkHwzvaVpA==)
-    password: ENC(iMwe5lEyyaFkIqpSxsGwrzAs4YOJlsBY)
-    hikari:
-      maximumPoolSize: 15
-      minimumIdle: 5
-      idleTimeout: 10000
+    url: jdbc:mariadb://localhost:3306/hotelity
+    username: root
+    password: root
+  #  datasource:
+  #    driver-class-name: org.mariadb.jdbc.Driver
+  #    url: jdbc:mariadb://183.109.119.245:3307/hotelity
+  #    username: root
+  #    password: root
+  #  datasource:
+  #    driver-class-name: org.mariadb.jdbc.Driver
+  #    url: jdbc:mariadb://mariadb-hotelity.cf488uigczkb.ap-northeast-2.rds.amazonaws.com:3306/hotelity
+  #    username: root
+  #    password: hotelity
   jpa:
     generate-ddl: false
     show-sql: true
@@ -24,14 +97,15 @@ spring:
         format_sql: true
   data:
     redis:
-      host: ENC(h3W4NTNKldG2+iXGVm7NBhTBxBSKj2OWnbDQvTq0jLrpwRMKffUTAJUV3MnyBEdAJVoNo2bn5eu5/xaZhEYnWiCnExq4IJPzXwmBXL8HlFRD5Roj0b0INQ==)
+      #      host: 192.168.0.31
+      host: localhost
       port: 6379
       expiration_time: 86400000 # 1일
   mail:
-    host: ENC(dqAOlK8LvZVY7JI9tIHJ/Vylqe9rFtbc)
+    host: smtp.gmail.com
     port: 587
-    username: ENC(XIVDUNkHy2oVfrR3Mmc0LsJiE9vM/JQDUpoirrzmnhw=)
-    password: ENC(s/dvkMZ265k/jDJypsc3s2QUZ04PoTxC0uTcMiZLk4o=)
+    username: eodud3196@gs.cwnu.ac.kr
+    password: kesy iild fjmb rtzx
     properties:
       mail:
         debug: true
@@ -44,23 +118,7 @@ spring:
 
 token:
   expiration_time: 3600000 # 1시간
-  secret: ENC(HiAmDQCu5uB3wxZd88tadcY88HR+h4ddSnett5UeK8A1SKj51Ta+Zt+wWkEv3pHeY+M0Hliot4SIFOxLmRXoTt9mZAmzygb0HbldxYLlFf+uia6UWS6TNhRzllzvaG8+6aRWwIZld/I=)
-
-aws:
-  s3:
-    accessKey: ENC(RfQev1y4fyRhfeLJm5jApjlY4vXBTb9Brk7fAQR7BR0=)
-    secretKey: ENC(xuzlJoAwmK+3F0hG+udoEVYhFkMLEREMp9+bknzKJ2kHxC944WNXptWB25WSCjFNROxTfJQ017Y=)
-    bucket: ENC(u7vwg/o3mdglMhfv8KXP8N5z13UUC6EV)
-
-jasypt:
-  encryptor:
-    bean: jasyptStringEncryptor
-
-openai:
-  api:
-    key: ENC(IzSsO5GBuqCRGIQd/FAQYFCLkk2qkhdacmKtf358axeC8Lhy93gXxUI+EkPkWwHhRuXKzQ8PjRagUZuWl4UlDQ==)
-    url: https://api.openai.com/v1/chat/completions
-  model: gpt-3.5-turbo
+  secret: k/3f0rHITyFhkBQWfa7rlSAQ3s07wIgj7pUGgq5Q4EXbihvcPPapnHnKQAWV+u3mXJzIBQ9Cm++F0JPEHIv80g==
 
 management:
   endpoints:
